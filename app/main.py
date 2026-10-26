@@ -9,8 +9,8 @@ def read_root():
     return {"Hello": "World"}
 
 #TODO Fix recitation hours to be correct for this semester.
-RECITATION_HOURS = {"a": "09:00~09:50", "b": "10:00~10:50",
-                    "c": "11:00~11:50", "d": "12:00~12:50"}
+RECITATION_HOURS = {"a": "10:00~10:50", "b": "10:00~10:50",
+                    "c": "13:00~13:50", "d": "13:00~13:50"}
 MICROSERVICE_LINK = "https://cmu-313.github.io/section_info/"
 
 
@@ -35,11 +35,12 @@ def get_section_info(section_id: str):
 
     # TODO Fix this to return correct values for correct sections.
     if section_id == "a":
+        start_time, end_time = RECITATION_HOURS[section_id].split("~")
         return {
-            "section": "section_name",
-            "start_time": "HH:MM",
-            "end_time": "HH:MM",
-            "ta": ["taName1", "taName2"]
+            "section": data["section"],
+            "start_time": start_time,
+            "end_time": end_time,
+            "ta": data["ta"]
         }
     else:
         raise HTTPException(status_code=404, detail="Invalid section id")
